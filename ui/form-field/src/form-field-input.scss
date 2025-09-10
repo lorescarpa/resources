@@ -1,0 +1,106 @@
+// The Input element proper.
+.bri-input-element {
+  // Font needs to be inherited, because by default <input> has a system font.
+  font: inherit;
+
+  // The Material input should match whatever background it is above.
+  background: transparent;
+
+  // If background matches current background then so should the color for proper contrast
+  color: currentColor;
+
+  // By default, <input> has a padding, border, outline and a default width.
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  // Prevent textareas from being resized outside the form field.
+  max-width: 100%;
+  height: 100%;
+
+  // Needed to make last line of the textarea line up with the baseline.
+  vertical-align: bottom;
+
+  // User agent stylesheets set the text-align of inputs explicitly to "start". Those can be
+  // easily overwritten by targeting the input element using a simple CSS selector, but since
+  // the text-align will be applied most of the time on the `bri-form-field` to also align the
+  // placeholder, the alignment should be inherited here.
+  text-align: inherit;
+
+  // It's common for developers to set `box-sizing: border-box` on every element on the page.
+  // Reset it to `content-box` since all of our styles are written with it in mind. `border-box`
+  // can also cause unnecessary scrollbars on auto-resizing textareas (see #21560).
+  box-sizing: content-box;
+
+  // Undo the red box-shadow glow added by Firefox on invalid inputs.
+  // See https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-ui-invalid
+  &:-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  // Clear Safari's decorations for search fields.
+  &,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  // Also clear Safari's autofill icons. Note that this can't be in the
+  // same selector as the IE ones, otherwise Safari will ignore it.
+  &::-webkit-contacts-auto-fill-button,
+    &::-webkit-caps-lock-indicator,
+    // Preserve the autofill icon on password inputs since it includes some important functionality.
+    &:not([type='password'])::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+  }
+
+  &[type='date'],
+  &[type='datetime'],
+  &[type='datetime-local'],
+  &[type='month'],
+  &[type='week'],
+  &[type='time'] {
+    // Due to the native input masking these inputs can be slightly taller than
+    // the plain text inputs. We normalize it by resetting the line height.
+    line-height: 1;
+
+    // Fixes an issue on iOS where the following input types will collapse to 1px,
+    // if they're empty, because we've overridden their background color.
+    // See: https://stackoverflow.com/questions/18381594/input-type-date-appearance-in-safari-on-ios
+    &::after {
+      content: ' ';
+      white-space: pre;
+      width: 1px;
+    }
+  }
+
+  // Reduce the size of the native buttons in a date/time input,
+  // because they can increase the height of the input (see #13317).
+  &::-webkit-inner-spin-button,
+  &::-webkit-calendar-picker-indicator,
+  &::-webkit-clear-button {
+    font-size: 0.75em;
+  }
+}
+
+// Prevents IE from always adding a scrollbar by default.
+textarea.bri-input-element {
+  // Only allow resizing along the Y axis.
+  resize: vertical;
+  overflow: auto;
+
+  &.cdk-textarea-autosize {
+    resize: none;
+  }
+}
+
+textarea.bri-input-element {
+  // The 2px padding prevents scrollbars from appearing on Chrome even when they aren't needed.
+  // We also add a negative margin to negate the effect of the padding on the layout.
+  padding: 2px 0;
+  margin: -2px 0;
+}

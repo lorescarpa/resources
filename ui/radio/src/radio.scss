@@ -1,0 +1,71 @@
+@use 'sass:map';
+@use './../../core/theming/theming';
+@use './../../core/theming/palette';
+@use './../../core/theming/utils';
+
+// <svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#10748b'><circle cx='8' cy='8' r='3'/></svg>
+
+@function circle-icon($color) {
+  @return "<svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='" +
+    utils.toRGB($color) + "'><circle cx='8' cy='8' r='3'/></svg>";
+}
+
+.bri-radio {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  print-color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  -webkit-user-select: none;
+  user-select: none;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: transparent;
+  background-color: palette.$bri-color-w;
+  border: 1px solid palette.$bri-color-k10;
+  border-radius: 100%;
+
+  &:focus-visible {
+    @include utils.ring;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: palette.$bri-color-k1;
+    border-color: palette.$bri-color-k7;
+  }
+}
+
+.bri-radio:checked {
+  background-color: currentColor;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &:not([disabled]) {
+    background-image: utils.inline-svg(circle-icon(palette.$bri-color-t2));
+  }
+
+  &:disabled {
+    background-image: utils.inline-svg(circle-icon(palette.$bri-color-k3));
+  }
+}
+
+/* .bri-radio:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%2310748b' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+} */
+
+/* .bri-radio:checked:hover,
+.bri-radio:checked:focus {
+  border-color: #6b7280;
+  background-color: currentColor;
+} */
+
+.bri-radio:disabled {
+  background-color: palette.$bri-color-k1;
+  border-color: palette.$bri-color-k3;
+}

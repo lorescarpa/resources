@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use './../../core/theming/palette';
+
+button.bri-tab-header-pagination {
+  flex-basis: 10px;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  &[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+.bri-tab-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 1px solid palette.$bri-color-k3;
+}
+
+.bri-tab-label-container {
+  flex: auto;
+}
+
+.bri-tab-labels {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 40px;
+}

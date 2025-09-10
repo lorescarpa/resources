@@ -1,0 +1,66 @@
+@use 'sass:map';
+@use './../../core/theming/theming';
+@use './../../core/theming/palette';
+@use './../../core/theming/utils';
+
+$bri-tooltip-margin: 10px;
+$bri-tooltip-arrow-width: 10px;
+
+.bri-tooltip {
+  &:before {
+    position: absolute;
+    content: '';
+  }
+
+  &.bri-tooltip-above {
+    margin-bottom: $bri-tooltip-margin;
+
+    &.bri-tooltip-right:before {
+      bottom: calc($bri-tooltip-margin - $bri-tooltip-arrow-width + 1px);
+      left: 0;
+      border-top: $bri-tooltip-arrow-width solid palette.$bri-color-t3;
+      border-right: $bri-tooltip-arrow-width solid transparent;
+    }
+
+    &.bri-tooltip-left:before {
+      bottom: calc($bri-tooltip-margin - $bri-tooltip-arrow-width + 1px);
+      right: 0;
+      border-top: $bri-tooltip-arrow-width solid palette.$bri-color-t3;
+      border-left: $bri-tooltip-arrow-width solid transparent;
+    }
+  }
+
+  &.bri-tooltip-below {
+    margin-top: $bri-tooltip-margin;
+
+    &.bri-tooltip-right:before {
+      top: calc($bri-tooltip-margin - $bri-tooltip-arrow-width + 1px);
+      border-bottom: $bri-tooltip-arrow-width solid palette.$bri-color-t3;
+      border-right: $bri-tooltip-arrow-width solid transparent;
+    }
+
+    &.bri-tooltip-left:before {
+      top: calc($bri-tooltip-margin - $bri-tooltip-arrow-width + 1px);
+      right: 0;
+      border-bottom: $bri-tooltip-arrow-width solid palette.$bri-color-t3;
+      border-left: $bri-tooltip-arrow-width solid transparent;
+    }
+  }
+
+  &-content {
+    text-decoration: none;
+    padding: 10px 15px;
+    max-width: 300px;
+    color: map.get(theming.$theme, 'text');
+    background-color: palette.$bri-color-t3;
+    border-radius: 2px;
+    border-bottom-left-radius: 0px;
+  }
+
+  &-trigger {
+    &:hover {
+      color: map.get(theming.$theme, 'primary');
+      cursor: pointer;
+    }
+  }
+}

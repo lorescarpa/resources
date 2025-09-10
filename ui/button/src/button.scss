@@ -1,0 +1,118 @@
+@use 'sass:map';
+@use './../../core/theming/theming';
+@use './../../core/theming/palette';
+@use './../../core/theming/utils';
+
+@mixin bri-button {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 4px;
+  font-family: map.get(theming.$theme, 'font-family');
+  cursor: pointer;
+  transition: background-color 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:focus-visible {
+    @include utils.ring;
+  }
+
+  &-disabled {
+    color: palette.$bri-color-k3 !important;
+    background-color: palette.$bri-color-k1 !important;
+    border: none !important;
+    pointer-events: none;
+  }
+
+  & .bri-icon svg path {
+    fill: currentColor;
+  }
+}
+
+.bri-button {
+  @include bri-button;
+  padding: 10px 20px;
+  min-width: 120px;
+  font-size: 18px;
+  font-weight: 600;
+
+  &.bri-primary {
+    border: 2px solid transparent;
+    background-color: map-get(theming.$theme, 'primary');
+    color: palette.$bri-color-w;
+
+    &:hover {
+      background-color: palette.$bri-color-t1;
+    }
+  }
+
+  &.bri-secondary {
+    color: palette.$bri-color-k10;
+    border: 2px solid palette.$bri-color-k10;
+
+    &:hover {
+      color: palette.$bri-color-k7;
+      border-color: palette.$bri-color-k7;
+    }
+  }
+
+  &:has(.bri-icon[name='loader']) {
+    pointer-events: none;
+
+    & svg {
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+a.bri-text-button {
+  text-decoration: underline;
+  text-transform: none;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.bri-text-button {
+  @include bri-button;
+  height: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  &.bri-button-disabled {
+    background: none !important;
+  }
+
+  & .bri-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  &.bri-primary {
+    color: map-get(theming.$theme, 'primary');
+
+    &:hover {
+      color: palette.$bri-color-t1;
+    }
+  }
+
+  &.bri-secondary {
+    color: palette.$bri-color-k10;
+
+    &:hover {
+      color: palette.$bri-color-k7;
+    }
+  }
+
+  &.bri-negative {
+    color: map-get(theming.$theme, 'negative');
+
+    &:hover {
+      color: palette.$bri-color-a1;
+    }
+  }
+}

@@ -1,0 +1,4 @@
+export const homeRenovationIcon = {
+  data: `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M29 9.93784H11.748C9.125 9.93784 7 7.81188 7 5.18992V0H28.558C28.802 0 29 0.197997 29 0.442993V9.93784ZM20 29.5V22.0002H18.5V14.2846L8.69301 10.9491C6.4823 10.052 5 7.85194 5 5.40892V0.187997H3V5.40892C3 8.66651 4.97636 11.5999 7.99562 12.8227L16.5 15.7168V22.0002H15V29.5C15 30.881 16.119 32 17.5 32C18.88 32 20 30.881 20 29.5Z"/></svg>`,
+  name: 'home-renovation' as const,
+};

@@ -1,0 +1,12 @@
+.bri-selection-box {
+  display: flex;
+  gap: 10px;
+
+  &[aria-orientation='vertical'] {
+    flex-direction: column;
+  }
+
+  &[aria-orientation='horizontal'] {
+    flex-direction: row;
+  }
+}

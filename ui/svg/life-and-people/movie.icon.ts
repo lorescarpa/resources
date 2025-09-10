@@ -1,0 +1,4 @@
+export const movieIcon = {
+  data: `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 9H29V6H24V9ZM24 26H29V23H24V26ZM17 9H22V6H17V9ZM17 26H22V23H17V26ZM10 26H15V23H10V26ZM3 9H8V6H3V9ZM3 26H8V23H3V26ZM20.5 16L13.5 19.5V12.5L20.5 16ZM10 9H15V6H10V9ZM4 3C1.791 3 0 4.791 0 7V29H28C30.209 29 32 27.209 32 25V3H4Z"/></svg>`,
+  name: 'movie' as const,
+};

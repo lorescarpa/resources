@@ -1,0 +1,40 @@
+@use './../../core/theming/palette';
+
+.bri-simple-notification {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 100px;
+  padding: 24px;
+  width: 420px;
+  min-height: 90px;
+  border-radius: 4px;
+
+  &-urgent {
+    color: palette.$bri-color-w;
+    background-color: palette.$bri-color-r5;
+  }
+
+  &-icon-container {
+    flex-basis: 44px;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  &-message-container {
+    box-sizing: border-box;
+    flex: 1;
+    padding: 5px 0;
+  }
+
+  &-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &-message {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 5px;
+  }
+}

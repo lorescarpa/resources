@@ -1,0 +1,10 @@
+@use 'palette';
+
+$theme: (
+  font-family: 'Unicredit',
+  primary: palette.$bri-color-t2,
+  text: palette.$bri-color-k10,
+  success: palette.$bri-color-g5,
+  warning: palette.$bri-color-o5,
+  negative: palette.$bri-color-r5,
+);

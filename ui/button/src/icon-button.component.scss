@@ -1,0 +1,61 @@
+@use 'sass:map';
+@use './../../core/theming/theming';
+@use './../../core/theming/palette';
+@use './../../core/theming/utils';
+
+@mixin bri-button {
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 4px;
+  font-family: map.get(theming.$theme, 'font-family');
+  cursor: pointer;
+
+  &:focus-visible {
+    @include utils.ring;
+  }
+}
+
+.bri-icon-button {
+  @include bri-button;
+  width: 24px;
+  height: 24px;
+
+  & .bri-icon svg path {
+    fill: currentColor;
+  }
+
+  &.bri-button-disabled {
+    color: palette.$bri-color-k3 !important;
+    pointer-events: none;
+    background: none !important;
+  }
+
+  &.bri-primary {
+    color: map.get(theming.$theme, 'primary');
+
+    &:focus {
+      @include utils.ring;
+    }
+
+    &:hover {
+      fill: palette.$bri-color-t1;
+    }
+  }
+
+  &.bri-secondary {
+    color: palette.$bri-color-k10;
+
+    &:focus {
+      @include utils.ring(2px, palette.$bri-color-k10);
+    }
+
+    &:hover {
+      color: palette.$bri-color-k7;
+    }
+  }
+}

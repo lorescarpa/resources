@@ -1,0 +1,48 @@
+@use 'sass:map';
+@use './../../core/theming/theming';
+
+$status-indicator-size: 100px;
+$status-indicator-max-width-text: 650px;
+
+.bri-status-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 10px;
+  }
+
+  &-icon {
+    width: $status-indicator-size !important;
+    height: $status-indicator-size !important;
+
+    &-success {
+      color: map.get(theming.$theme, 'success');
+    }
+
+    &-fail {
+      color: map.get(theming.$theme, 'negative');
+    }
+  }
+
+  &-title {
+    all: unset;
+    font-weight: 700;
+    font-size: 35px;
+    max-width: $status-indicator-max-width-text;
+  }
+
+  &-body {
+    all: unset;
+    max-width: $status-indicator-max-width-text;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+  }
+}

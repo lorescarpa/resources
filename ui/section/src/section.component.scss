@@ -1,0 +1,22 @@
+@use './../../core/theming/palette';
+
+.bri-section {
+  display: block;
+  margin-top: 40px;
+
+  &-title {
+    margin-bottom: 20px;
+    line-height: 15.4px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &-disclaimer {
+    margin-top: 10px;
+    line-height: 12.65px;
+    font-family: Arial;
+    font-weight: 400;
+    font-size: 11px;
+  }
+}

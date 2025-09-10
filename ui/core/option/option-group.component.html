@@ -1,0 +1,12 @@
+<span
+  class="bri-option-group-label"
+  role="presentation"
+  [class.bri-list-item--disabled]="disabled"
+  [id]="_labelId"
+>
+  <span class="bri-list-item__primary-text"
+    >{{ label }} <ng-content></ng-content
+  ></span>
+</span>
+
+<ng-content select="bri-option, ng-container"></ng-content>

@@ -1,0 +1,58 @@
+@use 'sass:map';
+@use './../../theming/theming';
+@use './../../theming/palette';
+@use './../../theming/utils';
+
+@function circle-icon($color) {
+  @return "<svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='" +
+    utils.toRGB($color) + "'><circle cx='8' cy='8' r='3'/></svg>";
+}
+
+.bri-pseudo-radio {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  print-color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  -webkit-user-select: none;
+  user-select: none;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: transparent;
+  background-color: palette.$bri-color-w;
+  border: 1px solid palette.$bri-color-k10;
+  border-radius: 100%;
+
+  &:focus-visible {
+    @include utils.ring;
+  }
+
+  &:hover:not(.bri-pseudo-radio-disabled),
+  &:focus:not(.bri-pseudo-radio-disabled) {
+    background-color: palette.$bri-color-k1;
+    border-color: palette.$bri-color-k7;
+  }
+}
+
+.bri-pseudo-radio-checked {
+  background-color: currentColor;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &:not(.bri-pseudo-radio-disabled) {
+    background-image: utils.inline-svg(circle-icon(palette.$bri-color-t2));
+  }
+
+  &.bri-pseudo-radio-disabled {
+    background-image: utils.inline-svg(circle-icon(palette.$bri-color-k3));
+  }
+}
+
+.bri-pseudo-radio-disabled {
+  background-color: palette.$bri-color-k1;
+  border-color: palette.$bri-color-k3;
+}

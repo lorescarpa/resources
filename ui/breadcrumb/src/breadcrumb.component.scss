@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use './../../core/theming/theming';
+@use './../../core/theming/palette';
+@use './../../core/theming/utils';
+
+.bri-breadcrumb {
+  font-family: map.get(theming.$theme, 'font-family');
+  & ol {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+
+    &-separator {
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div class="bri-status-indicator-content">
+  <bri-icon
+    class="bri-status-indicator-icon"
+    [ngClass]="'bri-status-indicator-icon-' + type()"
+    [name]="_typeIconName()"
+  ></bri-icon>
+  <h2 class="bri-status-indicator-title">
+    {{ title() }}
+  </h2>
+  <p class="bri-status-indicator-body">
+    {{ message() }}
+  </p>
+</div>

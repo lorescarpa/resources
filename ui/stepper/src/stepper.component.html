@@ -1,0 +1,20 @@
+<div class="bri-stepper-wrapper">
+  <div class="bri-stepper-content-container">
+    @for (step of _steps; track step; let i = $index) {
+    <div
+      class="bri-stepper-content"
+      role="tabpanel"
+      [@horizontalStepTransition]="{
+        value: _getAnimationDirection(i),
+        params: { animationDuration: _getAnimationDuration() }
+      }"
+      (@horizontalStepTransition.done)="_animationDone.next($event)"
+      [id]="_getStepContentId(i)"
+      [attr.aria-labelledby]="_getStepLabelId(i)"
+      [class.bri-stepper-content-inactive]="selectedIndex !== i"
+    >
+      <ng-container [ngTemplateOutlet]="step.content"></ng-container>
+    </div>
+    }
+  </div>
+</div>

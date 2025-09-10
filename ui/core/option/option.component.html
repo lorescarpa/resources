@@ -1,0 +1,21 @@
+<ng-content select="bri-icon"></ng-content>
+
+<span class="bri-list-item__primary-text" #text><ng-content></ng-content></span>
+
+<!-- Set aria-hidden="true" to this DOM node and other decorative nodes in this file. This might
+ be contributing to issue where sometimes VoiceOver focuses on a TextNode in the a11y tree instead
+ of the Option node (#23202). Most assistive technology will generally ignore non-role,
+ non-text-content elements. Adding aria-hidden seems to make VoiceOver behave more consistently. -->
+@if (multiple) {
+<bri-pseudo-checkbox
+  class="bri-option-pseudo-checkbox"
+  [disabled]="disabled"
+  [state]="selected ? 'checked' : 'unchecked'"
+  aria-hidden="true"
+></bri-pseudo-checkbox>
+}
+
+<!-- See a11y notes inside option-group.component.ts for context behind this element. -->
+@if (group && group._inert) {
+<span class="cdk-visually-hidden">({{ group.label }})</span>
+}

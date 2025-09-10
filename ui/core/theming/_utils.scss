@@ -1,0 +1,149 @@
+@use 'sass:meta';
+@use 'palette';
+
+// Replace letters
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}
+
+// Encode symbols
+@function url-encode($string) {
+  $map: (
+    '%': '%25',
+    '<': '%3C',
+    '>': '%3E',
+    '"': "'",
+    '&': '%26',
+    '#': '%23',
+  );
+
+  $new: $string;
+
+  @each $search, $replace in $map {
+    $new: str-replace($new, $search, $replace);
+  }
+
+  @return $new;
+}
+
+@function toRGB($colour) {
+  @return rgb(red($colour), green($colour), blue($colour));
+}
+
+// Format the SVG as a URL
+@function inline-svg($string) {
+  @return url('data:image/svg+xml,#{url-encode($string)}');
+}
+
+@mixin ring(
+  $width: 2px,
+  $color: #10748b,
+  $offset-width: 2px,
+  $offset-color: #ffffff
+) {
+  outline: 1px solid transparent;
+  outline-offset: 1px;
+  --shadow: 0 0 #0000;
+  --ring-inset: var(--empty, /*!*/ /*!*/);
+  --ring-color: #{meta.inspect($color)};
+  --ring-offset-width: #{meta.inspect($offset-width)};
+  --ring-offset-color: #{meta.inspect($offset-color)};
+  --ring-width: #{meta.inspect($width)};
+  --ring-offset-shadow: var(--ring-inset) 0 0 0 var(--ring-offset-width)
+    var(--ring-offset-color);
+  --ring-shadow: var(--ring-inset) 0 0 0
+    calc(var(--ring-width) + var(--ring-offset-width)) var(--ring-color);
+  box-shadow: var(--ring-offset-shadow), var(--ring-shadow), var(--shadow);
+  transition: box-shadow 150ms ease;
+}
+
+@mixin clamp($lines-number: 1) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines-number;
+}
+
+@mixin ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin grid-min-max-cols(
+  $min-cols,
+  $max-cols,
+  $cols-min-width,
+  $grid-row-gap: 0px,
+  $grid-column-gap: 0px
+) {
+  --min-cols: #{$min-cols};
+  --max-cols: #{$max-cols};
+  --cols-min-width: #{$cols-min-width};
+  --grid-row-gap: #{$grid-row-gap};
+  --grid-column-gap: #{$grid-column-gap};
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      0,
+      min(
+        (
+          100% / var(--min-cols) - var(--grid-column-gap) *
+            (var(--min-cols) - 1) / var(--min-cols)
+        ),
+        max(
+          var(--cols-min-width),
+          (
+            100% / var(--max-cols) - var(--grid-column-gap) *
+              (var(--max-cols) - 1) / var(--max-cols)
+          )
+        )
+      )
+    )
+  );
+  gap: $grid-row-gap $grid-column-gap;
+}
+
+@mixin scrollbar() {
+  &::-webkit-scrollbar {
+    background-color: #ffffff;
+    width: 16px;
+  }
+
+  /* background of the scrollbar except button or resizer */
+  &::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-track:hover {
+    background-color: #f4f4f4;
+  }
+
+  /* scrollbar itself */
+  &::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+    border: 5px solid #fff;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a5;
+    border: 4px solid #f4f4f4;
+  }
+
+  /* set button(top and bottom of the scrollbar) */
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+}

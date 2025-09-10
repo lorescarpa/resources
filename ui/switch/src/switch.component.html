@@ -1,0 +1,9 @@
+<div class="bri-switch-container">
+  <label><ng-content></ng-content></label>
+  <label class="bri-switch" [tabindex]="disabled ? -1 : 0">
+    @if (_ngControl) {
+    <input type="checkbox" role="switch" [formControl]="_ngControl.control" />
+    } @else { <input type="checkbox" role="switch" /> }
+    <span class="bri-switch-slider"></span>
+  </label>
+</div>

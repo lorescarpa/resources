@@ -1,0 +1,78 @@
+@use './../../core/theming/palette';
+@use './../../core/theming/utils';
+
+$bri-switch-width: 60px;
+$bri-switch-height: 34px;
+
+.bri-switch {
+  &-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  position: relative;
+  display: inline-block;
+  width: $bri-switch-width;
+  height: $bri-switch-height;
+
+  &:hover {
+    & .bri-switch-slider {
+      border: 2px solid palette.$bri-color-k7;
+    }
+  }
+
+  & input {
+    display: none;
+  }
+
+  &--disabled {
+    pointer-events: none;
+    & .bri-switch-slider {
+      border: 2px solid palette.$bri-color-k3 !important;
+
+      &::before {
+        background-color: palette.$bri-color-k3 !important;
+      }
+    }
+  }
+}
+
+.bri-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  padding: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: palette.$bri-color-w;
+  border: 2px solid palette.$bri-color-k10;
+  border-radius: 34px;
+  transition: 0.4s;
+
+  &:before {
+    position: absolute;
+    content: '';
+    height: 26px;
+    width: 26px;
+    top: 2px;
+    left: 2px;
+    bottom: 4px;
+    background-color: palette.$bri-color-k7;
+    border-radius: 50%;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+}
+
+input:checked {
+  & + .bri-switch-slider {
+    border: 2px solid palette.$bri-color-t1 !important;
+
+    &::before {
+      background-color: palette.$bri-color-t2;
+      transform: translateX(26px);
+    }
+  }
+}

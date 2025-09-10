@@ -1,0 +1,19 @@
+<form [formGroup]="_formGroup" class="calendar-header-container">
+  <bri-form-field>
+    <bri-label>Month</bri-label>
+    <bri-select placeholder="Select month" formControlName="month">
+      @for(month of _months(); track month) {
+      <bri-option [value]="month.index"> {{ month.name }}</bri-option>
+      }
+    </bri-select>
+  </bri-form-field>
+
+  <bri-form-field>
+    <bri-label>Year</bri-label>
+    <bri-select placeholder="Select year" formControlName="year">
+      @for(year of _years(); track year) {
+      <bri-option [value]="year">{{ year }}</bri-option>
+      }
+    </bri-select>
+  </bri-form-field>
+</form>

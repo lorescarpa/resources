@@ -1,0 +1,19 @@
+@use './../../core/theming/palette';
+
+.bri-tag {
+  display: flex;
+  align-items: center;
+  padding: 3px 7px;
+  min-width: 20px;
+  color: palette.$bri-color-w;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid palette.$bri-color-k3;
+  border-radius: 3px;
+
+  &-border {
+    color: transparent;
+    border: 1px solid palette.$bri-color-k3;
+  }
+}

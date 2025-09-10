@@ -1,0 +1,8 @@
+<div class="bri-selection-box-item-action">
+  <bri-pseudo-radio
+    [disabled]="disabled"
+    [state]="isSelected() ? 'checked' : 'unchecked'"
+    aria-hidden="true"
+  />
+</div>
+<div class="bri-selection-box-item-content"><ng-content></ng-content></div>

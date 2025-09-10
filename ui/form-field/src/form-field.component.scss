@@ -1,0 +1,92 @@
+@use 'sass:map';
+@use './../../core/theming/palette';
+@use './../../core/theming/theming';
+@use './../../core/theming/utils';
+
+.bri-form-field {
+  display: inline-block;
+  font-size: 18px;
+  color: map.get(theming.$theme, 'text');
+
+  & .bri-form-field-label {
+    @include utils.clamp;
+    color: palette.$bri-color-k10;
+  }
+
+  &-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid palette.$bri-color-k4;
+
+    &-transparent {
+      border: 1px solid transparent !important;
+    }
+  }
+
+  &-content {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 24px;
+    }
+  }
+
+  &-suffix {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  &-subscript-wrapper {
+    box-sizing: border-box;
+    height: 30px;
+    font-size: 14px;
+    overflow: hidden;
+    @include utils.clamp;
+  }
+
+  &-error-wrapper {
+    box-sizing: border-box;
+    height: 100%;
+    font-size: 18px;
+    padding: 5px 10px;
+    color: palette.$bri-color-w;
+    background-color: palette.$bri-color-r5;
+  }
+
+  &.bri-focused .bri-form-field-flex {
+    border: 1px solid palette.$bri-color-k10;
+    @include utils.ring;
+  }
+
+  &.bri-form-field-disabled {
+    color: palette.$bri-color-k3;
+
+    & .bri-form-field-flex {
+      background: palette.$bri-color-k1;
+    }
+
+    & .bri-input-element {
+      &::placeholder {
+        color: palette.$bri-color-k3;
+      }
+    }
+  }
+
+  &.bri-form-field-invalid {
+    & .bri-form-field-flex {
+      border: 2px solid map.get(theming.$theme, 'negative');
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@use './../../core/theming/palette';
+
+.bri-change-ring-item {
+  border: 2px solid transparent;
+  border-radius: 4px;
+  outline: 2px solid transparent;
+  transition: outline 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &-active {
+    outline: 2px solid palette.$bri-color-t2;
+  }
+}

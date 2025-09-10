@@ -1,0 +1,70 @@
+<button
+  bri-icon-button
+  color="primary"
+  [disabled]="_isPreviousButtonDisabled()"
+  (click)="previousPage()"
+>
+  <bri-icon name="arrow-back"></bri-icon>
+</button>
+<button
+  class="bri-paginator-page-indicator"
+  [style.display]="_hasFirstChunk() ? 'inline' : 'none'"
+  [disabled]="disabled"
+  (click)="_showFirstChunk()"
+>
+  ...
+</button>
+@for (index of _pageRange; track index) {
+<button
+  class="bri-paginator-page-indicator"
+  [disabled]="disabled"
+  (click)="middlePage(index)"
+>
+  <div
+    class="bri-paginator-page-indicator-text"
+    [class.bri-paginator-page-indicator-text-selected]="pageIndex === index"
+  >
+    {{ index + 1 }}
+  </div>
+  <div
+    class="bri-paginator-page-indicator-underline"
+    [style.visibility]="pageIndex === index ? 'visible' : 'hidden'"
+  ></div>
+</button>
+}
+<button
+  class="bri-paginator-page-indicator"
+  [style.display]="_hasLastChunk() ? 'inline' : 'none'"
+  [disabled]="disabled"
+  (click)="_showLastChunk()"
+>
+  ...
+</button>
+<button
+  class="bri-paginator-page-indicator"
+  [disabled]="disabled"
+  (click)="middlePage(getNumberOfPages() - 1)"
+>
+  <div
+    class="bri-paginator-page-indicator-text"
+    [class.bri-paginator-page-indicator-text-selected]="
+      pageIndex === getNumberOfPages() - 1
+    "
+  >
+    {{ getNumberOfPages() }}
+  </div>
+  <div
+    class="bri-paginator-page-indicator-underline"
+    [style.visibility]="
+      pageIndex === getNumberOfPages() - 1 ? 'visible' : 'hidden'
+    "
+  ></div>
+</button>
+<button
+  bri-icon-button
+  color="primary"
+  [disabled]="_isNextButtonDisabled()"
+  (click)="nextPage()"
+>
+  <bri-icon name="arrow-forth"></bri-icon>
+</button>

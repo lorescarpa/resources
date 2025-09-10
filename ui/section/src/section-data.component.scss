@@ -1,0 +1,30 @@
+@use './../../core/theming/palette';
+
+$bri-section-data-item-height: 24px;
+
+.bri-section-data {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  padding-left: 1px;
+  color: palette.$bri-color-k10;
+
+  &-label {
+    display: flex;
+    align-items: center;
+    height: $bri-section-data-item-height;
+    line-height: 15.4px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &-value {
+    display: flex;
+    align-items: center;
+    height: $bri-section-data-item-height;
+    line-height: 24px;
+    font-size: 18px;
+    font-weight: 400;
+  }
+}

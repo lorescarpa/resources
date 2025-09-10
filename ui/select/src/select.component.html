@@ -1,0 +1,61 @@
+<div
+  cdk-overlay-origin
+  class="bri-select-trigger"
+  (click)="open()"
+  #fallbackOverlayOrigin="cdkOverlayOrigin"
+  #trigger
+>
+  <div class="bri-select-value" [attr.id]="_valueId">
+    @if (empty) {
+    <span class="bri-select-placeholder bri-select-min-line">{{
+      placeholder
+    }}</span>
+    } @else {
+    <span class="bri-select-value-text">
+      @if (customTrigger) {
+      <ng-content select="mat-select-trigger"></ng-content>
+      } @else {
+      <span class="bri-select-min-line">{{ triggerValue }}</span>
+      }
+    </span>
+    }
+  </div>
+
+  <div class="bri-select-arrow-wrapper">
+    <bri-icon name="arrow-down" [@arrowRotate]="panelOpen"></bri-icon>
+  </div>
+</div>
+
+<ng-template
+  cdk-connected-overlay
+  cdkConnectedOverlayLockPosition
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayPanelClass]="_overlayPanelClass"
+  [cdkConnectedOverlayScrollStrategy]="_scrollStrategy"
+  [cdkConnectedOverlayOrigin]="_preferredOverlayOrigin || fallbackOverlayOrigin"
+  [cdkConnectedOverlayOffsetY]="-30"
+  [cdkConnectedOverlayOpen]="panelOpen"
+  [cdkConnectedOverlayPositions]="_positions"
+  [cdkConnectedOverlayWidth]="_overlayWidth"
+  (backdropClick)="close()"
+  (attach)="_onAttached()"
+  (detach)="close()"
+>
+  <div
+    #panel
+    role="listbox"
+    tabindex="-1"
+    class="bri-select-panel"
+    [attr.id]="id + '-panel'"
+    [attr.aria-multiselectable]="multiple"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-labelledby]="_getPanelAriaLabelledby()"
+    [ngClass]="panelClass"
+    [@transformPanel]="'showing'"
+    (@transformPanel.done)="_panelDoneAnimatingStream.next($event.toState)"
+    (keydown)="_handleKeydown($event)"
+  >
+    <ng-content></ng-content>
+  </div>
+</ng-template>

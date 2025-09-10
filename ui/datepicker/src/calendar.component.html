@@ -1,0 +1,19 @@
+<ng-template [cdkPortalOutlet]="_calendarHeaderPortal"></ng-template>
+<div class="bri-calendar-content" cdkMonitorSubtreeFocus tabindex="-1">
+  <bri-month-view
+    [(activeDate)]="activeDate"
+    [selected]="selected"
+    [dateFilter]="dateFilter"
+    [maxDate]="maxDate"
+    [minDate]="minDate"
+    [dateClass]="dateClass"
+    [comparisonStart]="comparisonStart"
+    [comparisonEnd]="comparisonEnd"
+    [startDateAccessibleName]="startDateAccessibleName"
+    [endDateAccessibleName]="endDateAccessibleName"
+    (_userSelection)="_dateSelected($event)"
+    (dragStarted)="_dragStarted($event)"
+    (dragEnded)="_dragEnded($event)"
+    [activeDrag]="_activeDrag"
+  ></bri-month-view>
+</div>

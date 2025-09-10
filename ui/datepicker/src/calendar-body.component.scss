@@ -1,0 +1,51 @@
+@use './../../core/theming/palette';
+
+.bri-calendar-table {
+  width: 400px;
+
+  &-header {
+    & th span {
+      font-size: 14px;
+      font-weight: 700;
+      color: palette.$bri-color-k7;
+    }
+  }
+}
+
+.bri-calendar-body-cell {
+  all: unset;
+  cursor: pointer;
+  &-container {
+    text-align: center;
+  }
+
+  &-content {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: palette.$bri-color-k10;
+    border-radius: 50%;
+
+    &:hover:not(.bri-calendar-body-selected) {
+      background-color: palette.$bri-color-k1;
+    }
+  }
+}
+
+.bri-calendar-body-today {
+  border: 1px solid palette.$bri-color-k10;
+}
+
+.bri-calendar-body-selected {
+  background-color: palette.$bri-color-t2;
+  color: palette.$bri-color-w;
+}
+
+.bri-calendar-body-disabled {
+  cursor: default;
+
+  & .bri-calendar-body-cell-content {
+    color: palette.$bri-color-k3;
+    background: palette.$bri-color-w !important;
+  }
+}

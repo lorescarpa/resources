@@ -1,0 +1,117 @@
+@use './../../core/theming/palette';
+
+$bri-table-header-row-height: 60px;
+$bri-table-row-height: 60px;
+$bri-table-row-horizontal-padding: 10px;
+
+$bri-table-border-radius: 4px;
+
+// Native HTML table structure
+@mixin table() {
+  table.bri-table {
+    border-spacing: 0;
+    color: palette.$bri-color-k10;
+  }
+
+  tr.bri-header-row {
+    height: $bri-table-header-row-height;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: palette.$bri-color-k1;
+
+    & th:first-child {
+      padding-right: 10px;
+      border-top-left-radius: $bri-table-border-radius;
+    }
+
+    & th:last-child {
+      padding-left: 10px;
+      border-top-right-radius: $bri-table-border-radius;
+    }
+  }
+
+  tr.bri-row,
+  tr.bri-footer-row {
+    height: $bri-table-row-height;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  th.bri-header-cell {
+    padding: 0 $bri-table-row-horizontal-padding;
+    text-align: left;
+
+    [dir='rtl'] & {
+      text-align: right;
+    }
+  }
+
+  td.bri-cell,
+  td.bri-footer-cell {
+    padding: 0 $bri-table-row-horizontal-padding;
+  }
+
+  th.bri-header-cell,
+  td.bri-cell,
+  td.bri-footer-cell {
+    border-bottom: 1px solid palette.$bri-color-k3;
+
+    &:first-of-type {
+      padding-left: $bri-table-row-horizontal-padding;
+
+      [dir='rtl'] &:not(:only-of-type) {
+        padding-left: 0;
+        padding-right: $bri-table-row-horizontal-padding;
+      }
+    }
+
+    &:last-of-type {
+      padding-right: $bri-table-row-horizontal-padding;
+
+      [dir='rtl'] &:not(:only-of-type) {
+        padding-right: 0;
+        padding-left: $bri-table-row-horizontal-padding;
+      }
+    }
+  }
+
+  .bri-table-sticky {
+    // Note that the table can either set this class or an inline style to make something sticky.
+    // We set the style as `!important` so that we get an identical specificity in both cases
+    // and to avoid cases where user styles have a higher specificity.
+    position: sticky !important;
+
+    &-border-elem-right {
+      border-left: 1px solid palette.$bri-color-k4;
+    }
+  }
+
+  th.bri-table-sticky-border-elem-right {
+    background-color: palette.$bri-color-k1;
+  }
+
+  td.bri-table-sticky-border-elem-right {
+    background-color: palette.$bri-color-w;
+  }
+
+  .bri-table-fixed-layout {
+    table-layout: fixed;
+  }
+}
+
+@mixin flex-table() {
+  tr {
+    display: flex;
+  }
+
+  th,
+  td {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+  }
+}

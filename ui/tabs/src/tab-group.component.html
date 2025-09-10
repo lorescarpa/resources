@@ -1,0 +1,81 @@
+<bri-tab-header
+  #tabHeader
+  [selectedIndex]="selectedIndex || 0"
+  [disablePagination]="disablePagination"
+  (indexFocused)="_focusChanged($event)"
+  (selectFocusedIndex)="selectedIndex = $event"
+>
+  @for (tab of _tabs; let index = $index; track tab) {
+  <div
+    #tabNode
+    role="tab"
+    class="bri-tab"
+    briTabLabelWrapper
+    cdkMonitorElementFocus
+    [id]="_getTabLabelId(index)"
+    [attr.tabIndex]="_getTabIndex(index)"
+    [attr.aria-posinset]="index + 1"
+    [attr.aria-setsize]="_tabs.length"
+    [attr.aria-controls]="_getTabContentId(index)"
+    [attr.aria-selected]="selectedIndex === index"
+    [attr.aria-label]="tab.ariaLabel || null"
+    [attr.aria-labelledby]="
+      !tab.ariaLabel && tab.ariaLabelledby ? tab.ariaLabelledby : null
+    "
+    [class.bri-tab--active]="selectedIndex === index"
+    [ngClass]="[
+      'bri-tab-' + 12 / _tabs.length,
+      tab.labelClass ? tab.labelClass : ''
+    ]"
+    [disabled]="tab.disabled"
+    [fitInkBarToContent]="fitInkBarToContent"
+    (click)="_handleClick(tab, tabHeader, index)"
+    (cdkFocusChange)="_tabFocusChanged($event, index)"
+  >
+    <span class="bri-tab__content">
+      <span class="bri-tab__text-label">
+        <!--
+            If there is a label template, use it, otherwise fall back to the text label.
+            Note that we don't have indentation around the text label, because it adds
+            whitespace around the text which breaks some internal tests.
+          -->
+        @if (tab.templateLabel) {
+        <ng-template [cdkPortalOutlet]="tab.templateLabel"></ng-template>
+        } @else {
+        {{ tab.textLabel }}
+        }
+      </span>
+    </span>
+  </div>
+  }
+</bri-tab-header>
+
+<div
+  class="bri-tab-body-wrapper"
+  [class._mat-animation-noopable]="_animationMode === 'NoopAnimations'"
+  #tabBodyWrapper
+>
+  @for (tab of _tabs; let index = $index; track tab;) {
+  <bri-tab-body
+    role="tabpanel"
+    [id]="_getTabContentId(index)"
+    [attr.tabindex]="
+      contentTabIndex != null && selectedIndex === index
+        ? contentTabIndex
+        : null
+    "
+    [attr.aria-labelledby]="_getTabLabelId(index)"
+    [attr.aria-hidden]="selectedIndex !== index"
+    [class.bri-tab-body-active]="selectedIndex === index"
+    [ngClass]="tab.bodyClass"
+    [content]="tab.content!"
+    [position]="tab.position!"
+    [origin]="tab.origin"
+    [animationDuration]="animationDuration"
+    [preserveContent]="preserveContent"
+    (_onCentered)="_removeTabBodyWrapperHeight()"
+    (_onCentering)="_setTabBodyWrapperHeight($event)"
+  >
+  </bri-tab-body>
+  }
+</div>

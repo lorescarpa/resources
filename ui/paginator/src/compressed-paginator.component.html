@@ -1,0 +1,17 @@
+<button
+  bri-icon-button
+  color="primary"
+  [disabled]="!hasPreviousPage()"
+  (click)="previousPage()"
+>
+  <bri-icon name="arrow-back"></bri-icon>
+</button>
+<button class="bri-paginator-page-indicator">{{ currentPage() + 1 }}</button>
+<button
+  bri-icon-button
+  color="primary"
+  [disabled]="!hasNextPage()"
+  (click)="nextPage()"
+>
+  <bri-icon name="arrow-forth"></bri-icon>
+</button>

@@ -1,0 +1,23 @@
+<nav class="bri-breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    @for (item of _items; track item.id; let last = $last) {
+    <li class="bri-breadcrumb-item">
+      @if (!item.selected()) {
+      <a
+        bri-text-button
+        aria-current="page"
+        [tabIndex]="!item.disabled() ? 0 : -1"
+        [disabled]="item.disabled()"
+        (click)="select(item)"
+      >
+        {{ item?.label() }}
+      </a>
+      } @else {
+      <span>{{ item.label() }}</span>
+      } @if (!last) {
+      <span class="bri-breadcrumb-item-separator">/</span>
+      }
+    </li>
+    }
+  </ol>
+</nav>

@@ -1,0 +1,80 @@
+@use 'sass:map';
+@use './../../core/theming/theming';
+@use './../../core/theming/palette';
+@use './../../core/theming/utils';
+
+$bri-grid-columns: 12;
+
+@mixin tab-list {
+  @for $i from 1 through $bri-grid-columns {
+    .bri-tab-#{$i} {
+      grid-column: auto / span #{$i};
+      padding: 8px 20px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.bri-tab {
+  /* &-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 40px;
+    font-family: map.get(theming.$theme, 'font-family');
+    border-bottom: 1px solid palette.$bri-color-k3;
+  } */
+
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: palette.$bri-color-k10;
+
+  &:hover:not(.bri-tab-item-active) {
+    color: palette.$bri-color-k7;
+  }
+
+  /* &:focus-visible {
+      background-color: red;
+      outline-width: 0;
+    } */
+
+  &--active {
+    color: map.get(theming.$theme, 'primary');
+    border-bottom: 3px solid map.get(theming.$theme, 'primary');
+  }
+
+  &-body {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    outline: 0;
+
+    // Fix for auto content wrapping in IE11
+    flex-basis: 100%;
+
+    &.bri-tab-body-active {
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+      z-index: 1;
+      flex-grow: 1;
+    }
+
+    .bri-tab-group.bri-tab-group-dynamic-height &.bri-tab-body-active {
+      overflow-y: hidden;
+    }
+
+    &-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      transition: height 500ms cubic-bezier(0.35, 0, 0.25, 1);
+    }
+  }
+}
+
+@include tab-list;

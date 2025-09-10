@@ -1,0 +1,84 @@
+@use 'sass:map';
+@use './../../theming/theming';
+@use './../../theming/palette';
+@use './../../theming/utils';
+
+@function single-tick-icon($color) {
+  @return "<svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='" +
+    utils.toRGB($color) +
+    "'><path d='M12.292 4.298c1.024-1.064 2.684-1.064 3.708 0l-8.381 8.702-6.119-6.35c1.024-1.064 2.684-1.064 3.708 0l2.412 2.495 4.673-4.847z' /></svg>";
+}
+
+@function indeterminate-icon($color) {
+  @return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='" +
+    utils.toRGB($color) + "'><path stroke='" + utils.toRGB($color) +
+    "' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/></svg>";
+}
+
+.bri-pseudo-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 3px;
+  print-color-adjust: exact;
+  display: inline-block;
+  vertical-align: middle;
+  background-origin: border-box;
+  -webkit-user-select: none;
+  user-select: none;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: palette.$bri-color-w;
+  background-color: palette.$bri-color-w;
+  border: 1px solid palette.$bri-color-k10;
+  border-radius: 4px;
+
+  &:hover,
+  &:focus {
+    background-color: palette.$bri-color-k1;
+    border-color: palette.$bri-color-k7;
+  }
+}
+
+.bri-pseudo-checkbox:focus-visible {
+  @include utils.ring;
+}
+
+.bri-pseudo-checkbox:checked,
+.bri-pseudo-checkbox-checked {
+  background-size: 80% 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &:not([disabled]) {
+    background-image: utils.inline-svg(single-tick-icon(palette.$bri-color-t2));
+  }
+
+  &:disabled {
+    background-image: utils.inline-svg(single-tick-icon(palette.$bri-color-k3));
+  }
+}
+
+.bri-pseudo-checkbox:indeterminate {
+  background-color: currentColor;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &:not([disabled]) {
+    background-image: utils.inline-svg(
+      indeterminate-icon(palette.$bri-color-t2)
+    );
+  }
+
+  &:disabled {
+    background-image: utils.inline-svg(
+      indeterminate-icon(palette.$bri-color-k3)
+    );
+  }
+}
+
+.bri-pseudo-checkbox:disabled {
+  background-color: palette.$bri-color-k1;
+  border-color: palette.$bri-color-k3;
+}

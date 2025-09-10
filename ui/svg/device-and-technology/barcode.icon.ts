@@ -1,0 +1,4 @@
+export const barcodeIcon = {
+  data: `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.99988 28H0V4H3.99988V28ZM5.99981 28H7.99975V4H5.99981V28ZM15.9995 28H17.9994V4H15.9995V28ZM21.9993 28H19.9994V4H21.9993V28ZM23.9993 28H25.9992V4H23.9993V28ZM14.0006 28H9.99969V4H14.0006V28ZM27.9991 28H32V4H27.9991V28Z"/></svg>`,
+  name: 'barcode' as const,
+};

@@ -1,0 +1,9 @@
+@use './../../core/theming/palette';
+
+.bri-datepicker-content-container {
+  box-sizing: border-box;
+  margin-top: -18px;
+  padding: 10px;
+  border: 1px solid palette.$bri-color-k4;
+  background-color: palette.$bri-color-w;
+}

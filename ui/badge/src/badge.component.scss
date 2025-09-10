@@ -1,0 +1,92 @@
+@use 'sass:map';
+@use './../../core/theming/palette';
+@use './../../core/theming/theming';
+
+$bri-badge-default-size: 22px !default;
+$bri-badge-small-size: $bri-badge-default-size - 6;
+$bri-badge-large-size: $bri-badge-default-size + 6;
+
+.bri-badge {
+  position: relative;
+
+  // The badge should make sure its host is overflow visible so that the badge content
+  // can be rendered outside of the element. Some components such as <mat-icon> explicitly
+  // style `overflow: hidden` so this requires extra specificity so that it does not
+  // depend on style load order.
+  &.bri-badge {
+    overflow: visible;
+  }
+
+  &-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    transition: transform 200ms ease-in-out;
+    transform: scale(0.6);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    pointer-events: none;
+    border-radius: 50%;
+    border: 1px solid palette.$bri-color-w;
+
+    .bri-badge-above & {
+      bottom: 50%;
+    }
+
+    .bri-badge-below & {
+      top: 100%;
+    }
+
+    .bri-badge-before & {
+      right: 100%;
+    }
+
+    [dir='rtl'] .bri-badge-before & {
+      right: auto;
+      left: 100%;
+    }
+
+    .bri-badge-after & {
+      left: 50%;
+    }
+
+    [dir='rtl'] .bri-badge-after & {
+      left: auto;
+      right: 100%;
+    }
+
+    .bri-badge-primary & {
+      color: palette.$bri-color-w;
+      background-color: map.get(theming.$theme, 'primary');
+    }
+  }
+}
+
+.bri-badge-content.bri-badge-active {
+  // Scale to `none` instead of `1` to avoid blurry text in some browsers.
+  transform: none;
+}
+
+.bri-badge-size .bri-badge-content {
+  padding: 0 4px;
+  width: $bri-badge-small-size;
+  height: $bri-badge-small-size;
+}
+
+.bri-badge-medium .bri-badge-content {
+  padding: 0 4px;
+  width: $bri-badge-default-size;
+  height: $bri-badge-default-size;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bri-badge-large .bri-badge-content {
+  padding: 0 4px;
+  width: $bri-badge-large-size;
+  height: $bri-badge-large-size;
+}
